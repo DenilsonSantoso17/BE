@@ -23,10 +23,44 @@ app.get('/pendaftaran', async (req, res) => {
     res.status(200).json(pendaftaran)
 })
 
-//rute untuk pourteam
+//rute untuk ourteam
 app.get('/ourteam', async (req, res) => {
     const ourteam = await prisma.ourTeam.findMany();
     res.status(200).json(ourteam)
+})
+
+//post untuk pendaftaran
+app.post('/pendaftaran', async (req, res) => {
+    const { nama, email, jenis_konseling, pilihan_dokter } = req.body;
+    console.log(req.body);
+    const createPendaftaran = await prisma.pendaftaran.create({
+        data: {
+            nama,
+            email,
+            jenis_konseling,
+            pilihan_dokter
+        }
+    })
+    res.status(201).json({
+        message : "Pendaftaran Berhasil",
+        data : createPendaftaran
+    })
+})
+
+//post untuk feedback
+app.post('/feedback', async (req, res) => {
+    const { nama, pesan } = req.body;
+    console.log(req.body);
+    const createFeedback = await prisma.feedback.create({
+        data: {
+            nama,
+            pesan,
+        }
+    })
+    res.status(201).json({
+        message : "Ulasan Telah Di Buat",
+        data : createFeedback
+    })
 })
 
 app.listen(3000, () => {
