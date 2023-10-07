@@ -24,5 +24,6 @@ pendaftaranRoutes.post('/', async (req, res) => {
     })
 })
 
+// untuk export modul
 
 module.exports = {pendaftaranRoutes}
