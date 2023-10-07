@@ -13,23 +13,29 @@ app.use(express.json()) //parse request body dari JSON ke Object
 app.use(express.urlencoded({ extended : true })) //parse request body dari x-www-form-urlencoded ke object 
 
 
-app.get('/', (req, res) => {
-    res.send('Hello  dfdsfsfdd World');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello  dfdsfsfdd World');
+// });
 
-//rute untuk pendaftaran
+//rute get untuk pendaftaran
 app.get('/pendaftaran', async (req, res) => {
     const pendaftaran = await prisma.pendaftaran.findMany();
     res.status(200).json(pendaftaran)
 })
 
-//rute untuk ourteam
+//rute get untuk ourteam
 app.get('/ourteam', async (req, res) => {
     const ourteam = await prisma.ourTeam.findMany();
     res.status(200).json(ourteam)
 })
 
-//post untuk pendaftaran
+//rute get untuk feedback
+app.get('/feedback', async (req, res) => {
+    const feedback = await prisma.feedback.findMany();
+    res.status(200).json(feedback)
+})
+
+//rute post untuk pendaftaran
 app.post('/pendaftaran', async (req, res) => {
     const { nama, email, jenis_konseling, pilihan_dokter } = req.body;
     console.log(req.body);
@@ -47,7 +53,7 @@ app.post('/pendaftaran', async (req, res) => {
     })
 })
 
-//post untuk feedback
+//rute post untuk feedback
 app.post('/feedback', async (req, res) => {
     const { nama, pesan } = req.body;
     console.log(req.body);
