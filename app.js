@@ -17,10 +17,16 @@ app.get('/', (req, res) => {
     res.send('Hello  dfdsfsfdd World');
 });
 
-//rute untuk product
+//rute untuk pendaftaran
 app.get('/pendaftaran', async (req, res) => {
     const pendaftaran = await prisma.pendaftaran.findMany();
     res.status(200).json(pendaftaran)
+})
+
+//rute untuk pourteam
+app.get('/ourteam', async (req, res) => {
+    const ourteam = await prisma.ourTeam.findMany();
+    res.status(200).json(ourteam)
 })
 
 app.listen(3000, () => {
